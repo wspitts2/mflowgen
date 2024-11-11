@@ -92,15 +92,21 @@ def main():
   echo_red     = '\033[91m'
   echo_bold    = '\033[1m'
   echo_nocolor = '\033[0m'
+  echo_orange = '\033[38;2;255;165;0m'
 
   done_str  = echo_green + 'done ' + echo_nocolor
+  warn_str = echo_orange   + 'warn ' + echo_nocolor
   build_str = echo_red   + 'build' + echo_nocolor
 
   status = { s: done_str for s in steps }
 
   for s in steps:
-    if any([ re.match( r'.*touch ' + s + '/.postconditions.stamp', l ) for l in lines ]):
+    
+    if any([re.match(r'.*touch ' + s + '/.postconditions.stamp', l) for l in lines]):
       status[s] = build_str
+      print(f"Setting status to 'build' for step {s}")
+    if os.path.exists(s + '/.warning.stamp'):
+      status[s] = warn_str 
 
   # Check which steps are prebuilt (i.e., have a special '.prebuilt' file)
   # and check which steps are subgraphs
