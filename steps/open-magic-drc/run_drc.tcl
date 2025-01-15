@@ -1,7 +1,7 @@
 # DRC batch script as done in the run_drc.tcl script generated from openPDK
 
 puts "\[Magic DRC\]: $::env(design_name)"
-gds read inputs/design-merged.gds
+gds read inputs/design_merged.gds
 load $::env(design_name)
 puts "\[INFO\]: Finished loading $::env(design_name)"
 select top cell

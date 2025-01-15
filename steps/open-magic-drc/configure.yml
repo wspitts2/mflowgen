@@ -12,7 +12,7 @@ name: open-magic-drc
 #-------------------------------------------------------------------------
 inputs:
   - adk
-  - design-merged.gds
+  - design_merged.gds
 
 outputs:
   - drc_results.log
